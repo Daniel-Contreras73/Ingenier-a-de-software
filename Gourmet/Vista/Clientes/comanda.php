@@ -44,7 +44,7 @@
         <h2>Carrito</h2>
         <div id="carrito"></div>
 
-        <form id="formComanda" action="insertar-comanda" method="post">
+        <form id="formComanda" action="ClienteController.php?action=insertarComanda" method="post">
             <input type="hidden" name="carrito" id="carritoInput">
             <button id="enviarComanda" type="button">Enviar Comanda</button>
         </form>
