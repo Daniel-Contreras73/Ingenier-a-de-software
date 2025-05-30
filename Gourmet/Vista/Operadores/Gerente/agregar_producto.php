@@ -1,3 +1,4 @@
+
 <h1>Agregar Producto</h1>
 <form action="GerenteController.php?accion=procesarAgregarProducto" method="post">
     <label for="descripcion">Nombre del producto:</label>

@@ -1,0 +1,274 @@
+/* Estilos generales para el catálogo de operadores */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+/* Título principal */
+h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    border: none;
+}
+
+/* Encabezados de la tabla */
+th {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 18px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    position: relative;
+}
+
+th:first-child {
+    border-top-left-radius: 10px;
+}
+
+th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* Celdas de la tabla */
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    border: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+/* Filas de la tabla */
+tr {
+    transition: all 0.3s ease;
+}
+
+tr:hover {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:nth-child(even):hover {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e0f2fe 100%);
+}
+
+/* Enlaces de acción */
+a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Enlace Actualizar */
+a[href*="actualizarOperador"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #333;
+    border: 2px solid transparent;
+}
+
+a[href*="actualizarOperador"]:hover {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffa8e4 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+}
+
+/* Enlace Borrar */
+a[href*="borrarOperador"] {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 100%);
+    color: white;
+    border: 2px solid transparent;
+}
+
+a[href*="borrarOperador"]:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #ff8a80 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 82, 82, 0.3);
+}
+
+/* Enlace Agregar Operador */
+a[href*="agregarOperador"] {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 30px;
+    margin-top: 20px;
+    display: inline-block;
+    box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+}
+
+a[href*="agregarOperador"]:hover {
+    background: linear-gradient(135deg, #0093E6 0%, #00C6FB 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(79, 172, 254, 0.4);
+}
+
+/* Contenedor del botón agregar */
+.add-button-container {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 10px 8px;
+    }
+    
+    a {
+        padding: 6px 12px;
+        font-size: 11px;
+        margin: 1px;
+    }
+    
+    /* En móviles, hacer que los enlaces de acción se apilen verticalmente */
+    td a {
+        display: block;
+        margin: 3px 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .table-container {
+        padding: 10px;
+    }
+    
+    /* Hacer la tabla scrolleable horizontalmente en pantallas muy pequeñas */
+    .table-wrapper {
+        overflow-x: auto;
+        margin: -10px;
+        padding: 10px;
+    }
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Efectos adicionales para mejorar la experiencia */
+th {
+    position: relative;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Indicador de estado hover para toda la fila */
+tr::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+tr {
+    position: relative;
+}
+
+tr:hover::before {
+    transform: scaleY(1);
+}

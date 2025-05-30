@@ -1,8 +1,7 @@
-
-<h1>XD</h1>
+<link rel="stylesheet" href="../../CSS/Operador/catalagoOperador.css" />
 <!-- catalogoOperador.php -->
 <h2>Catálogo de Operadores</h2>
-
+ 
 <table border="1">
     <tr>
         <th>ID</th>
