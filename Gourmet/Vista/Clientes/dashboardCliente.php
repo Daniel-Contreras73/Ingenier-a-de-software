@@ -269,7 +269,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                 </div>
             </a>
             
-            <a href="mis-pedidos.php" class="action-card history-card">
+            <a href="/IGourmet/Gourmet/Controlador/Clientes/ClienteController.php?action=mostrarComandas&id=<?= $_SESSION['idUsuario'] ?>" class="action-card history-card">
                 <div class="card-icon">
                     📋
                 </div>

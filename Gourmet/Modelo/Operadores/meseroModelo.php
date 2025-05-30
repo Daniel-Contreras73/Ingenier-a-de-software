@@ -37,16 +37,30 @@ class meseroModelo
             $stmt->execute();
         }
     }
-    public function obtenerComandas($idOperador)
+public function obtenerComandas($idOperador)
+{
+    $sql = "SELECT 
+                c.IdComanda,
+                c.IdOperador,
+                c.Estado ,
+                c.Total,
+                m.IdMesa,
+                m.Capacidad,
+                m.Estado AS EstadoMesa
+            FROM Comanda c
+            LEFT JOIN Mesa m ON c.IdOperador = m.IdOperador
+            WHERE c.IdOperador = :idOperador";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindParam(':idOperador', $idOperador, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+    public function obtenerMesas($idOperador)
     {
-        $stmt = $this->db->prepare("SELECT * FROM Comanda WHERE IdOperador = :idOperador");
-        $stmt->bindParam(':idOperador', $idOperador); // ✅ uso correcto del parámetro
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function obtenerMesas()
-    {
-        $stmt = $this->db->query("SELECT * FROM Mesa LEFT JOIN Reservaciones ON Mesa.IdMesa = Reservaciones.IdMesa LEFT JOIN Operadores ON Mesa.Id_Operador = Operadores.IdOperador");
+        $stmt = $this->db->query("SELECT * FROM Mesa LEFT JOIN Operadores ON Mesa.Id_Operador = Operadores.IdOperador");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

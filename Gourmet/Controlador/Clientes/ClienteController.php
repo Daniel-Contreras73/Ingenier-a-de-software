@@ -6,12 +6,14 @@ require_once('../../Modelo/Clientes/crudClientes.php');
 require_once('../../Modelo/Clientes/loginClienteModel.php'); // Necesario para el login automático
 // Asegúrate de que la ruta es correcta
 require_once('../../Modelo/Operadores/cajeroModelo.php'); // Necesario para el login automático
+require_once('../../Modelo/Clientes/ClienteModelo.php');
 require_once('../../Modelo/Operadores/meseroModelo.php'); // Necesario para el login automático
 
 
 $crud = new CrudClientes();
 $cliente = new Cliente();
 $loginModel = new loginClienteModel(); // Instancia del modelo de login
+$clienteModelo = new ClienteModelo(); 
 $meseroModelo = new meseroModelo();
 
 
@@ -22,6 +24,7 @@ class ClienteController
     private $loginModel;
     private $cajeroModelo;
     private $meseroModelo;
+    private $clienteModelo;
 
     public function __construct()
     {
@@ -29,6 +32,7 @@ class ClienteController
         $this->loginModel = new LoginClienteModel();
         $this->cajeroModelo = new cajeroModelo();
         $this->meseroModelo = new meseroModelo();
+        $this->clienteModelo = new ClienteModelo();
     }
 
     public function registrar()
@@ -124,6 +128,13 @@ class ClienteController
         }
         
         include('../../Vista/Clientes/dashboardCliente.php');
+    }
+    public function mostrarComandas(){
+
+        $comandas = $this->clienteModelo->mostrarComandas($_SESSION['idUsuario']);
+        include('../../Vista/Clientes/pedidos.php');
+        exit();
+        echo "Función de mostrar comandas no implementada.";
     }
 }
 

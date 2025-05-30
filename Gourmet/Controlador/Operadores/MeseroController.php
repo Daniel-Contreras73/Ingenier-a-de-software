@@ -45,17 +45,18 @@ class MeseroController
     public function administrarComandas()
     {
         $comandas = $this->modelo->obtenerComandas($_SESSION['idUsuario']);
+
         include('../../Vista/Operadores/Mesero/admin_mesero.php');
         exit();
     }
-    public function gestionarMesas()
-    {
-        // Aquí podrías implementar la lógica para gestionar mesas
-        // Por ejemplo, mostrar un formulario para asignar mesas a comandas
-        $mesas = $this->modelo->obtenerMesas(); // ✅ punto y coma corregido
-        include('../../Vista/Operadores/Mesero/gestionar_mesas.php');
-        exit();
-    }
+    // public function gestionarMesas()
+    // {
+    //     // Aquí podrías implementar la lógica para gestionar mesas
+    //     // Por ejemplo, mostrar un formulario para asignar mesas a comandas
+    //     $mesas = $this->modelo->obtenerMesas(); // ✅ punto y coma corregido
+    //     include('../../Vista/Operadores/Mesero/gestionar_mesas.php');
+    //     exit();
+    // }
 }
 
 // Instancia del controlador
