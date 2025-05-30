@@ -84,7 +84,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
 
         <div class="card">
             <p> Gestión de productos</p>
-            <a href="#">Gestionar productos</a>
+            <a href="../../../Controlador/Operadores/GerenteController.php?accion=gestionarProductos">Gestionar productos</a>
         </div>
     </div>
 </div>

@@ -22,6 +22,26 @@ class GerenteModelo
         $stmt = $this->db->query("SELECT * FROM TiposOperadores");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function actualizarOperador($idOperador, $nombres, $apellidos, $email, $contrasena, $idTiposOperador)
+    {
+        $stmt = $this->db->prepare("UPDATE Operadores SET Nombres = :nombres, Apellidos = :apellidos, 
+            Email = :email, Contrasena = :contrasena, IdTiposOperador = :idTiposOperador WHERE IdOperador = :idOperador");
+
+        $stmt->bindParam(':nombres', $nombres);
+        $stmt->bindParam(':apellidos', $apellidos);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':contrasena', $contrasena);
+        $stmt->bindParam(':idTiposOperador', $idTiposOperador);
+        $stmt->bindParam(':idOperador', $idOperador);
+
+        $stmt->execute();
+    }
+    public function borrarOperador($idOperador)
+    {
+        $stmt = $this->db->prepare("DELETE FROM Operadores WHERE IdOperador = :idOperador");
+        $stmt->bindParam(':idOperador', $idOperador);
+        $stmt->execute();
+    }
 
     public function insertar($operador)
     {
@@ -39,10 +59,36 @@ class GerenteModelo
 
     public function obtenerVentas()
     {
-        $ventas = [
-            'comanda' => $this->db->query("SELECT * FROM Comanda c INNER JOIN DetalleComandaProducto d ON c.IdComanda = d.IdComanda")->fetchAll(PDO::FETCH_ASSOC),
-            'pedido' => $this->db->query("SELECT * FROM Pedido p INNER JOIN DetallePedidoProducto d ON p.IdPedido = d.IdPedido")->fetchAll(PDO::FETCH_ASSOC)
-        ];
-        return $ventas;
+        return $this->db->query("
+        SELECT * 
+        FROM Comanda c
+        INNER JOIN DetalleComandaProducto d ON c.IdComanda = d.IdComanda
+        WHERE c.Estado = 2
+    ")->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function obtenerProductos(){
+        $stmt = $this->db->query("SELECT * FROM Productos");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function borrarProducto($idProducto)
+    {
+        $stmt = $this->db->prepare("DELETE FROM Productos WHERE IdProducto = :idProducto");
+        $stmt->bindParam(':idProducto', $idProducto);
+        $stmt->execute();
+    }
+    public function actualizarProducto($idProducto, $descripcion, $precio)
+    {
+        $stmt = $this->db->prepare("UPDATE Productos SET Descripcion = :descripcion, Precio = :precio WHERE IdProducto = :idProducto");
+        $stmt->bindParam(':descripcion', $descripcion);
+        $stmt->bindParam(':precio', $precio);
+        $stmt->bindParam(':idProducto', $idProducto);
+        $stmt->execute();
+    }
+    public function insertarProducto($descripcion, $precio)
+    {
+        $stmt = $this->db->prepare("INSERT INTO Productos (Descripcion, Precio) VALUES (:descripcion, :precio)");
+        $stmt->bindParam(':descripcion', $descripcion);
+        $stmt->bindParam(':precio', $precio);
+        $stmt->execute();
     }
 }

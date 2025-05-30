@@ -15,6 +15,10 @@
             <td><?= htmlspecialchars($op['IdOperador']) ?></td>
             <td><?= htmlspecialchars($op['Nombres']) ?></td>
             <td><?= htmlspecialchars($op['Email']) ?></td>
+            <td><a href="GerenteController.php?accion=actualizarOperador&id=<?= $op['IdOperador'] ?>">Actualizar</a></td>
+            <td><a href="GerenteController.php?accion=borrarOperador&id=<?= $op['IdOperador'] ?>">Borrar</a>            </td>
         </tr>
+        
     <?php endforeach; ?>
+    <a href="GerenteController.php?accion=agregarOperador">Agregar Operador</a>
 </table>
