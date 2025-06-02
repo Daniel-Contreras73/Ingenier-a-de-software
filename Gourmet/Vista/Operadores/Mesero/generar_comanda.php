@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Carrito de Compras</title>
+    <h3><a href="/IGourmet/Gourmet/Vista/Operadores/Mesero/mesero_inicio.php">Rgresar</a></h3>
     <style>
         .producto,
         #carrito {

@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesero Incio</title>
+      <h3><a href="/IGourmet/Gourmet/index.html">Rgresar</a></h3>
 </head>
 
 <body>
@@ -25,12 +26,12 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="../../../Controlador/Operadores/MeseroController.php?accion=administrarComandas">Click</a>
 
         </div>
-    </div>
+    <!-- </div>
         <div class="card">
             <h1>Administrar Mesas</h1>
             <a href="../../../Controlador/Operadores/MeseroController.php?accion=gestionarMesas">Click</a>
 
-        </div>
+        </div> -->
     </div>
 </body>
 

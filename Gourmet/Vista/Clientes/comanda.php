@@ -28,6 +28,7 @@
 <body>
 
     <h1>Crear Comanda</h1>
+     <h3><a href="/IGourmet/Gourmet/Vista/Clientes/dashboardCliente.php">Regresar</a></h3>
     <div class="container">
 
         <h2>Productos</h2>

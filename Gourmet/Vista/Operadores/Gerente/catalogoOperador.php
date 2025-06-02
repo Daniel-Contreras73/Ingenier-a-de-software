@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../../CSS/Operador/catalagoOperador.css" />
 <!-- catalogoOperador.php -->
 <h2>Catálogo de Operadores</h2>
- 
+  <h3><a href="/IGourmet/Gourmet/Vista/Operadores/Gerente/dashboardGerente.php">Rgresar</a></h3>
 <table border="1">
     <tr>
         <th>ID</th>

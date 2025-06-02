@@ -222,6 +222,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
 <body>
     <header class="dashboard-header">
         <div class="brand">Restaurante Gourmet</div>
+       
         <div class="user-info">
             <div class="user-avatar">
                 <?php echo strtoupper(substr($_SESSION['nombre'], 0, 1)); ?>

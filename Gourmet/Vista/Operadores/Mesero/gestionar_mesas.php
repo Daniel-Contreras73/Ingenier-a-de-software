@@ -1,4 +1,5 @@
 <h1>Gestión de Mesas</h1>
+<h3><a href="/IGourmet/Gourmet/Vista/Operadores/Mesero/mesero_inicio.php">Rgresar</a></h3>
 <table>
     <tr>
         <th>ID Mesa</th>

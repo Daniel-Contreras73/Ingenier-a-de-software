@@ -1,4 +1,5 @@
 <h1>Registrar Tarjeta</h1>
+  <h3><a href="/IGourmet/Gourmet/Controlador/Operadores/CajeroController.php?accion=caja">Rgresar</a></h3>
 <form action="CajeroController.php?accion=registrarPago&id=<?= $idComanda ?>" method="post">
     <input type="hidden" name="id_comanda" value="<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
     <label>Nombre en la tarjeta:</label>

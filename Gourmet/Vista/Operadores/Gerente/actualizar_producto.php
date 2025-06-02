@@ -1,4 +1,5 @@
 <h1>Actualizar producto</h1>
+<h3><a href="/IGourmet/Gourmet/Vista/Operadores/Gerente/dashboardGerente.php">Rgresar</a></h3>
 <form action="GerenteController.php?accion=procesarActualizarProducto&id=<?= $_GET['id'] ?>" method="post">
     <label for="descripcion">Nombre del producto:</label>
     <input type="text" id="descripcion" name="descripcion" value="<?= htmlspecialchars($producto['Descripcion']) ?>" required>

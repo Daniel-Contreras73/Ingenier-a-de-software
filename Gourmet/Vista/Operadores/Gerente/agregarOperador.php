@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="../../CSS/Operador/agregar.css" />
 <div class="form-page">
     <h1>Agregar Operador</h1>
-
+    
+  <h3><a href="/IGourmet/Gourmet/Vista/Operadores/Gerente/dashboardGerente.php">Rgresar</a></h3>
     <form action="GerenteController.php?accion=insertarOperador" method="post">
         <label for="nombres">Nombres:</label>
         <input type="text" id="nombres" name="nombres" required>

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Actualizar Operador</title>
     <link rel="stylesheet" href="../../CSS/Operador/actualizar.css">
+    <h3><a href="/IGourmet/Gourmet/Vista/Operadores/Gerente/dashboardGerente.php">Rgresar</a></h3>
 </head>
+
 <body>
     <div class="form-container">
         <h1>Actualizar Operador</h1>
@@ -26,7 +29,7 @@
             <label for="tipoOperador">Tipo de Operador:</label>
             <select id="tipoOperador" name="tipoOperador" required>
                 <?php foreach ($tiposOperador as $tipo): ?>
-                   <option value="<?= $tipo['IdTiposOperador'] ?>"><?= $tipo['Descripcion'] ?></option>
+                    <option value="<?= $tipo['IdTiposOperador'] ?>"><?= $tipo['Descripcion'] ?></option>
                 <?php endforeach; ?>
             </select>
 
@@ -34,4 +37,5 @@
         </form>
     </div>
 </body>
+
 </html>

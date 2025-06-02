@@ -59,7 +59,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
     </style>
 </head>
 <body>
-
+  <h3><a href="/IGourmet/Gourmet/index.html">Rgresar</a></h3>
 
 <div class="contenedor">
     <h1>Panel de Control del Gerente</h1>

@@ -1,6 +1,7 @@
 <h1>Gestionar productos</h1>
 <div class="container-productos">
     <h2>Lista de Productos</h2>
+      <h3><a href="/IGourmet/Gourmet/Vista/Operadores/Gerente/dashboardGerente.php">Rgresar</a></h3>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
             <tr>

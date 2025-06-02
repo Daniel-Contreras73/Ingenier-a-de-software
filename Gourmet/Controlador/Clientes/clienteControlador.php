@@ -108,7 +108,7 @@ class ClienteControlador
         session_destroy();
 
         // Redirigir al login
-        header('Location: /Gourmet/Vista/Clientes/loginCliente.php');
+        header('Location: /IGourmet/Gourmet/index.html');
         exit();
     }
 

@@ -1,5 +1,6 @@
 <h1>Pedidos</h1>
- 
+
+<h3><a href="/IGourmet/Gourmet/Vista/Clientes/dashboardCliente.php">Regresar</a></h3>
 <table border="1">
     <tr>
         <th>ID Pedido</th>

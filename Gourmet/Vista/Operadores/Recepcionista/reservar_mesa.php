@@ -1,4 +1,5 @@
 <h1>reservar_mesa</h1>
+  <h3><a href="/IGourmet/Gourmet/Controlador/Operadores/RecepcionistaController.php?accion=reservaciones">Rgresar</a></h3>
 <?= $idMesa ?? '' ?>
 <form action="RecepcionistaController.php?accion=insertarReservacion" method="post">
     <input type="hidden" name="idmesa" value="<?= $idMesa ?>">

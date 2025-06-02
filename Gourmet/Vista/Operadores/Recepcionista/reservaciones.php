@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="/IGourmet/Gourmet/CSS/Recepcionista/reservaciones.css">
-
-<a href="RecepcionistaController.php?accion=reservar&idmesa=<?= $mesa['IdMesa'] ?>">Reservar</a>
+<h3><a href="/IGourmet/Gourmet/index.html">Rgresar</a></h3>
 
 <div class="container">
     <?php foreach ($mesas as $mesa): ?>
