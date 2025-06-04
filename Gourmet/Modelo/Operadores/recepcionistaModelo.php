@@ -58,5 +58,36 @@ class RecepcionistaModelo
         $update->bindParam(':Estado', $estadoPendiente);
 
         $update->execute();
+        $updatecliente = $this->db->prepare("Update Clientes SET IDMesas = :IdMesa WHERE IdClientes = :IdCliente");
+        $updatecliente->bindParam(':IdMesa', $datosReservacion['IdMesa']);
+        $updatecliente->bindParam(':IdCliente', $datosReservacion['IdCliente']);
+        $updatecliente->execute();
+
+        $updateOperador = $this->db->prepare("UPDATE Operadores SET IdMesas = :IdMesa WHERE IdOperador = :IdOperador");
+        $updateOperador->bindParam(':IdMesa', $datosReservacion['IdMesa']);
+        $updateOperador->bindParam(':IdOperador', $datosReservacion['IdOperador']);
+        $updateOperador->execute();
+        
+    }
+    public function eliminar($idMesa)
+    {
+        // Eliminar la reservación de la mesa
+        $sql = "DELETE FROM Reservaciones WHERE IdMesa = :IdMesa";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':IdMesa', $idMesa);
+        $stmt->execute();
+
+        // Actualizar el estado de la mesa a 'Disponible' y eliminar el operador asignado
+        $update = $this->db->prepare("UPDATE Mesa SET IdOperador = NULL, Estado = 'D' WHERE IdMesa = :IdMesa");
+        $update->bindParam(':IdMesa', $idMesa);
+        $update->execute();
+
+        // Actualizar el cliente para eliminar la referencia a la mesa
+        $updateCliente = $this->db->prepare("UPDATE Clientes SET IdMesas = NULL WHERE IdMesas = :IdMesa");
+        $updateCliente->bindParam(':IdMesa', $idMesa);
+        $updateCliente->execute();
+
+        //acualiza el operador para eliminar la referencia a la mesa
+        $updateOperador = $this->db->prepare("UPDATE Operadores SET IdMesas = NULL WHERE IdMesas = :IdMesa");
     }
 }

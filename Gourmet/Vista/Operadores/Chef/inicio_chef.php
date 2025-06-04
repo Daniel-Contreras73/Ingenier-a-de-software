@@ -1,75 +1,61 @@
-<h1>Inicio mesas</h1>
-<h3><a href="/IGourmet/Gourmet/index.html">Rgresar</a></h3>
+<h1>Incio mesas</h1>
 <?php
-// Agrupar comandas por IdComanda
 $comandasAgrupadas = [];
 
-foreach ($comandas as $item) {
-    $id = $item['IdComanda'];
+foreach ($comandas as $fila) {
+    $id = $fila['IdComanda'];
+
     if (!isset($comandasAgrupadas[$id])) {
         $comandasAgrupadas[$id] = [
-            'IdComanda' => $id,
-            'NombreOperador' => $item['NombreOperador'],
+            'NombreOperador' => $fila['NombreOperador'],
+            'Total' => $fila['Total'],
             'productos' => []
         ];
     }
+
     $comandasAgrupadas[$id]['productos'][] = [
-        'Descripcion' => $item['Descripcion'],
-        'Precio' => $item['Precio'],
-        'Cantidad' => $item['Cantidad'],
-        'Subtotal' => $item['Subtotal']
+        'Nombre' => $fila['Nombre'],
+        'Descripcion' => $fila['Descripcion'],
+        'Precio' => $fila['Precio'],
+        'Cantidad' => $fila['Cantidad'],
+        'Subtotal' => $fila['Subtotal']
+        
     ];
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8" />
-    <title>Comandas - Chef</title>
-    <link rel="stylesheet" href="/IGourmet/Gourmet/CSS/Chef/inicio_chef.css" />
-
-</head>
-
-<body>
-    <h1>Comandas con Estado 0</h1>
-
-    <?php foreach ($comandasAgrupadas as $comanda): ?>
-        <h2>Comanda #<?= htmlspecialchars($comanda['IdComanda']) ?> - Operador: <?= htmlspecialchars($comanda['NombreOperador']) ?></h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Platillo</th>
-                    <th>Precio Unitario</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $totalComanda = 0;
-                foreach ($comanda['productos'] as $prod):
-                    $totalComanda += $prod['Subtotal'];
-                ?>
-                    <tr>
-                        <td><?= htmlspecialchars($prod['Descripcion']) ?></td>
-                        <td><?= number_format($prod['Precio'], 2) ?></td>
-                        <td><?= $prod['Cantidad'] ?></td>
-                        <td><?= number_format($prod['Subtotal'], 2) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <td colspan="3" style="text-align:right;"><strong>Total Comanda:</strong></td>
-                    <td><strong><?= number_format($totalComanda, 2) ?></strong></td>
-                </tr>
-            </tbody>
-            <a href="CocineroController.php?accion=completar&idComanda=<?= $comanda['IdComanda'] ?>">
-                Completar pedido
-            </a>
-        </table>
+<?php foreach ($comandasAgrupadas as $idComanda => $comanda): ?>
+    <h3>Comanda #<?= $idComanda ?> | Operador: <?= $comanda['NombreOperador'] ?></h3>
+    <table border="1" cellpadding="5">
+       <thead>
+    <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+    </tr>
+</thead>
+<tbody>
+    <?php foreach ($comanda['productos'] as $producto): ?>
+        <tr>
+            <td><?= $producto['Nombre'] ?></td>
+            <td>$<?= number_format($producto['Precio'], 2) ?></td>
+            <td><?= $producto['Cantidad'] ?></td>
+            <td>$<?= number_format($producto['Subtotal'], 2) ?></td>
+        </tr>
     <?php endforeach; ?>
+</tbody>
+<tfoot>
+    <tr>
+        <th colspan="3" style="text-align:right;">Total:</th>
+        <th>$<?= number_format($comanda['Total'], 2) ?></th>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align:right;">
+            <a href="CocineroController.php?accion=completar&idComanda=<?= $idComanda ?>">Finalizado</a>
+        </td>
+    </tr>
+</tfoot>
 
-</body>
-
-</html>
+    </table>
+    <br><hr><br>
+<?php endforeach; ?>

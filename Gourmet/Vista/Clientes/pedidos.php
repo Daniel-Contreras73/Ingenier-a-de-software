@@ -9,9 +9,21 @@
     </tr>
     <?php foreach ($comandas as $pedido): ?>
         <tr>
-            <td><?= htmlspecialchars($pedido['IdComanda']) ?></td>
-            <td><?= htmlspecialchars($pedido['Estado']) ?></td>
-            <td>$<?= htmlspecialchars($pedido['Total']) ?></td>
-            
+            <td><?= $pedido['IdComanda'] ?></td>
+            <<td><?= $pedido['IdComanda'] ?></td>
+                <td >
+                    <?php if ($pedido['Estado'] == 0): ?>
+                        <span> Espera</span>
+                    <?php elseif ($pedido['Estado'] == 1): ?>
+                        <span> Listo</span>
+                    <?php elseif ($pedido['Estado'] == 2): ?>
+                        <span> Pagado</span>
+                    <?php else: ?>
+                        <span> Estado desconocido</span>
+                    <?php endif; ?>
+                </td>
+
+                <td>$<?= htmlspecialchars($pedido['Total']) ?></td>
+
         </tr>
     <?php endforeach; ?>

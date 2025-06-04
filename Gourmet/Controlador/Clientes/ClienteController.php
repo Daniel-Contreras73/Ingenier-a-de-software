@@ -1,6 +1,8 @@
 <?php
 // Controlador/Clientes/clienteControlador.php
-session_start(); // Añade esto al inicio
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once('../../Modelo/Clientes/cliente.php');
 require_once('../../Modelo/Clientes/crudClientes.php');
 require_once('../../Modelo/Clientes/loginClienteModel.php'); // Necesario para el login automático
@@ -13,7 +15,7 @@ require_once('../../Modelo/Operadores/meseroModelo.php'); // Necesario para el l
 $crud = new CrudClientes();
 $cliente = new Cliente();
 $loginModel = new loginClienteModel(); // Instancia del modelo de login
-$clienteModelo = new ClienteModelo(); 
+$clienteModelo = new ClienteModelo();
 $meseroModelo = new meseroModelo();
 
 
@@ -56,7 +58,35 @@ class ClienteController
             exit();
         }
     }
+    public function menu()
+    {
+        $productos = $this->meseroModelo->obtenerProductos();
+        include('../../Vista/Clientes/menuCliente.php');
+        exit();
+    }
 
+    public function login()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+            $contrasena = $_POST['contrasena'];
+
+            $cliente = $this->loginModel->autenticarCliente($email);
+
+            if ($cliente && password_verify($contrasena, $cliente['Contrasena'])) {
+                $_SESSION['idUsuario'] = $cliente['IdClientes'];
+                $_SESSION['nombre'] = $cliente['Nombres'];
+                $_SESSION['tipo'] = 'Cliente';
+                $_SESSION['logged_in'] = true;
+                header('Location: ../../Vista/Clientes/dashboardCliente.php');
+                exit();
+            } else {
+                $_SESSION['error_login'] = 'Email o contraseña incorrectos';
+                header('Location: ../../Vista/Clientes/loginCliente.php');
+                exit();
+            }
+        }
+    }
     public function logout()
     {
         // Limpiar todos los datos de sesión
@@ -109,15 +139,25 @@ class ClienteController
     }
     public function insertarComanda()
     {
+        $operador = $this->clienteModelo->obtenerOperador($_SESSION['idUsuario']);
+
+        if (!$operador || empty($operador['IdOperador'])) {
+            die(" No se encontró un operador relacionado al cliente. Verifica que el cliente tenga mesa asignada y la mesa tenga un operador.");
+        }
+
+        var_dump($operador); // Comprobar lo que devuelve
+        // exit(); // activa esto si quieres ver el resultado
+
         if (isset($_POST['carrito'])) {
-            $productos = json_decode($_POST['carrito'], true); // esto es un array de productos, no ['productos' => ...]
+            $productos = json_decode($_POST['carrito'], true);
             $total = 0;
             foreach ($productos as $producto) {
                 $total += $producto['precio'] * $producto['cantidad'];
             }
 
             $datosComanda = [
-                'idOperador' => $_SESSION['idUsuario'],
+                'IdCliente' => $_SESSION['idUsuario'],
+                'idOperador' => $operador['IdOperador'],
                 'productos' => $productos,
                 'total' => $total
             ];
@@ -126,10 +166,12 @@ class ClienteController
         } else {
             echo "No se recibió carrito.";
         }
-        
+
         include('../../Vista/Clientes/dashboardCliente.php');
     }
-    public function mostrarComandas(){
+
+    public function mostrarComandas()
+    {
 
         $comandas = $this->clienteModelo->mostrarComandas($_SESSION['idUsuario']);
         include('../../Vista/Clientes/pedidos.php');

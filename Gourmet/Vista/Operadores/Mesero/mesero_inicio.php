@@ -26,12 +26,11 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="../../../Controlador/Operadores/MeseroController.php?accion=administrarComandas">Click</a>
 
         </div>
-    <!-- </div>
-        <div class="card">
-            <h1>Administrar Mesas</h1>
-            <a href="../../../Controlador/Operadores/MeseroController.php?accion=gestionarMesas">Click</a>
+  <div class="card">
+            <h1>Información de comanda/h1>
+            <a href="../../../Controlador/Operadores/MeseroController.php?accion=informacionComanda">Click</a>
 
-        </div> -->
+        </div>
     </div>
 </body>
 

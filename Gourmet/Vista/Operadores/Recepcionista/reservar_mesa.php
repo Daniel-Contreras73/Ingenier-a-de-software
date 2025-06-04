@@ -1,18 +1,22 @@
 <h1>reservar_mesa</h1>
-  <h3><a href="/IGourmet/Gourmet/Controlador/Operadores/RecepcionistaController.php?accion=reservaciones">Rgresar</a></h3>
+<h3><a href="/IGourmet/Gourmet/Controlador/Operadores/RecepcionistaController.php?accion=reservaciones">Rgresar</a></h3>
 <?= $idMesa ?? '' ?>
 <form action="RecepcionistaController.php?accion=insertarReservacion" method="post">
     <input type="hidden" name="idmesa" value="<?= $idMesa ?>">
     <select name="IdUsuario" id="">
         <option value="">Seleccione un cliente</option>
         <?php foreach ($clientes as $cliente): ?>
+            <?php if ($cliente['IdMesas'] != Null) continue; ?>
             <option value="<?= $cliente['IdClientes'] ?>"><?= $cliente['Nombres'] . ' ' . $cliente['Apellidos'] ?></option>
+            <php endif ?>
         <?php endforeach; ?>
     </select>
     <select name="IdOperador" id="">
         <option value="">Seleccione un operador</option>
         <?php foreach ($operadores as $operador): ?>
-            <option value="<?= $operador['IdOperador'] ?>"><?= $operador['Nombres'] . ' ' . $operador['Apellidos'] ?></option>
+            <?php if ($operador['IdTiposOperador'] == 2) : ?>
+                <option value="<?= $operador['IdOperador'] ?>"><?= $operador['Nombres'] . ' ' . $operador['Apellidos'] ?></option>
+            <?php endif; ?>
         <?php endforeach; ?>
 
         <label for="fecha">Fecha:</label>

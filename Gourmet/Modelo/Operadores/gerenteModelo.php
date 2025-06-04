@@ -63,12 +63,21 @@ class GerenteModelo
         SELECT * 
         FROM Comanda c
         INNER JOIN DetalleComandaProducto d ON c.IdComanda = d.IdComanda
+        INNER JOIN Operadores o ON c.IdOperador = o.IdOperador
         WHERE c.Estado = 2
     ")->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function obtenerProductos(){
+    public function obtenerProductos()
+    {
         $stmt = $this->db->query("SELECT * FROM Productos");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function obtenerProductoPorId($idProducto)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM Productos WHERE IdProducto = :idProducto");
+        $stmt->bindParam(':idProducto', $idProducto);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function borrarProducto($idProducto)
     {
@@ -76,19 +85,23 @@ class GerenteModelo
         $stmt->bindParam(':idProducto', $idProducto);
         $stmt->execute();
     }
-    public function actualizarProducto($idProducto, $descripcion, $precio)
+    public function actualizarProducto($datosProducto)
     {
-        $stmt = $this->db->prepare("UPDATE Productos SET Descripcion = :descripcion, Precio = :precio WHERE IdProducto = :idProducto");
-        $stmt->bindParam(':descripcion', $descripcion);
-        $stmt->bindParam(':precio', $precio);
-        $stmt->bindParam(':idProducto', $idProducto);
+        $stmt = $this->db->prepare("UPDATE Productos SET Nombre = :nombre, Descripcion = :descripcion, Precio = :precio,Imagen = :imagen WHERE IdProducto = :idProducto");
+        $stmt->bindParam(':nombre', $datosProducto['nombre']);
+        $stmt->bindParam(':descripcion', $datosProducto['descripcion']);
+        $stmt->bindParam(':precio', $datosProducto['precio']);
+        $stmt->bindParam(':imagen', $datosProducto['imagen']);
+        $stmt->bindParam(':idProducto', $datosProducto['idProducto']);
+
         $stmt->execute();
     }
-    public function insertarProducto($descripcion, $precio)
+    public function insertarProducto($descripcion, $precio, $imagen)
     {
-        $stmt = $this->db->prepare("INSERT INTO Productos (Descripcion, Precio) VALUES (:descripcion, :precio)");
+        $stmt = $this->db->prepare("INSERT INTO Productos (Descripcion, Precio, Imagen) VALUES (:descripcion, :precio, :imagen)");
         $stmt->bindParam(':descripcion', $descripcion);
         $stmt->bindParam(':precio', $precio);
+        $stmt->bindParam(':imagen', $imagen);
         $stmt->execute();
     }
 }

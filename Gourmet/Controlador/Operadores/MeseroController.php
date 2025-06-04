@@ -57,6 +57,13 @@ class MeseroController
     //     include('../../Vista/Operadores/Mesero/gestionar_mesas.php');
     //     exit();
     // }
+    public function informacionComanda()
+    {
+       
+            $comandas = $this->modelo->obtenerComandas($_SESSION['idUsuario']);
+            include('../../Vista/Operadores/Mesero/ver_comandas.php');
+            exit();
+    }
 }
 
 // Instancia del controlador

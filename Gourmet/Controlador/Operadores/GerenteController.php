@@ -104,6 +104,7 @@ class GerenteController
     {
         // Aquí deberías implementar la lógica para actualizar un producto
         // Por ejemplo, recibir el ID del producto a actualizar y mostrar un formulario para editarlo
+        $producto = $this->modelo->obtenerProductoPorId($_GET['id']);
         include('../../Vista/Operadores/Gerente/actualizar_producto.php');
         echo "Función de actualizar producto no implementada.";
     }
@@ -111,11 +112,33 @@ class GerenteController
     {
         // Aquí deberías implementar la lógica para procesar la actualización del producto
         // Por ejemplo, recibir los datos del formulario y llamar al modelo correspondiente
-        $idProducto = $_GET['id'];
-        $descripcion = $_POST['descripcion'];
-        $precio = $_POST['precio'];
+        $datosProducto = [
+            'idProducto' => $_GET['id'],
+            'nombre' => $_POST['nombre'],
+            'descripcion' => $_POST['descripcion'],
+            'precio' => $_POST['precio']
+        ];
 
-        $this->modelo->actualizarProducto($idProducto, $descripcion, $precio);
+        // Manejo de la imagen
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+            $nombreImagen = $_FILES['imagen']['name'];
+            $rutaRelativa = 'img/productos/' . $nombreImagen;
+            $rutaAbsoluta = __DIR__ . '/../../' . $rutaRelativa;
+
+            if (!file_exists(dirname($rutaAbsoluta))) {
+                mkdir(dirname($rutaAbsoluta), 0777, true);
+            }
+
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaAbsoluta);
+            $datosProducto['imagen'] = $rutaRelativa;
+        } else {
+            // Si no se sube nueva imagen, puedes mantener la anterior (opcional)
+            $productoActual = $this->modelo->obtenerProductoPorId($_GET['id']);
+            $datosProducto['imagen'] = $productoActual['Imagen'];
+        }
+
+
+        $this->modelo->actualizarProducto($datosProducto);
 
         $this->gestionarProductos();
         exit();
@@ -129,13 +152,29 @@ class GerenteController
     }
     public function procesarAgregarProducto()
     {
-        // Aquí deberías implementar la lógica para procesar el formulario de agregar producto
-        // Por ejemplo, recibir los datos del formulario y llamar al modelo correspondiente
+        // ✅ Obtener los datos del formulario
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
 
-        $this->modelo->insertarProducto($descripcion, $precio);
+        // ✅ Manejo de la imagen
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+            $nombreImagen = $_FILES['imagen']['name'];
+            $rutaRelativa = 'img/productos/' . $nombreImagen;
+            $rutaAbsoluta = __DIR__ . '/../../' . $rutaRelativa;
 
+            if (!file_exists(dirname($rutaAbsoluta))) {
+                mkdir(dirname($rutaAbsoluta), 0777, true);
+            }
+
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaAbsoluta);
+        } else {
+            $rutaRelativa = null; // o 'img/productos/default.jpg' si quieres imagen por defecto
+        }
+
+        // ✅ Guardar en la base de datos
+        $this->modelo->insertarProducto($descripcion, $precio, $rutaRelativa);
+
+        // ✅ Redirigir a la vista
         $this->gestionarProductos();
         exit();
     }

@@ -9,6 +9,7 @@
                 <p>Capacidad: <?php echo $mesa['Capacidad']; ?></p>
                 <p>Estado: <?php echo $mesa['Estado']; ?></p>
                 <a href="RecepcionistaController.php?accion=reservar&idmesa=<?= $mesa['IdMesa'] ?> ">Resercvar</a>
+                <a href="RecepcionistaController.php?accion=eliminarRecervacion&idmesa=<?= $mesa['IdMesa'] ?> ">Eliminar</a>
             </div>
             <div class="operador-card">
                 <?php if (!empty($mesa['IdOperador'])): ?>

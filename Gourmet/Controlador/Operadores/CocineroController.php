@@ -25,6 +25,7 @@ class CocineroController
         $this->index();
         exit();
     }
+    
 }
 
 // Instancia del controlador

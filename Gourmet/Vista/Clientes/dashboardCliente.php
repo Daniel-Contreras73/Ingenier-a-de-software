@@ -1,17 +1,10 @@
 <?php
-session_start();
 
-// Verificar autenticación
-if (!isset($_SESSION['idUsuario']) || $_SESSION['tipo'] !== 'Cliente') {
-    header('Location: loginCliente.php');
-    exit();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
-
-// Mostrar mensajes temporales
-$success_message = $_SESSION['success_message'] ?? '';
-$error_message = $_SESSION['error_message'] ?? '';
-unset($_SESSION['success_message'], $_SESSION['error_message']);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -235,21 +228,15 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
     </header>
 
     <div class="main-container">
-        <?php if ($success_message): ?>
-            <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>
-        <?php endif; ?>
-        
-        <?php if ($error_message): ?>
-            <div class="alert alert-error"><?php echo htmlspecialchars($error_message); ?></div>
-        <?php endif; ?>
-
+       
+      
         <section class="welcome-section">
             <h2 class="welcome-title">Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></h2>
             <p class="welcome-text">Desde aquí puedes gestionar tus pedidos, reservas y preferencias en nuestro restaurante.</p>
         </section>
 
         <div class="actions-grid">
-            <a href="menuCliente.php" class="action-card menu-card">
+            <a href="/IGourmet/Gourmet/Controlador/Clientes/clienteController.php?action=menu" class="action-card menu-card">
                 <div class="card-icon">
                     🍽️
                 </div>
@@ -280,7 +267,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                 </div>
             </a>
             
-            <a href="reservas.php" class="action-card reserve-card">
+            <!-- <a href="reservas.php" class="action-card reserve-card">
                 <div class="card-icon">
                     🗓️
                 </div>
@@ -298,7 +285,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                     <h3>Mi Perfil</h3>
                     <p>Actualiza tu información personal y preferencias</p>
                 </div>
-            </a>
+            </a> -->
         </div>
     </div>
 

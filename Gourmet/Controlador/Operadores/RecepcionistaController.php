@@ -43,6 +43,21 @@ class RecepcionistaController
 
         $this->reservaciones();
     }
+    public function eliminarRecervacion()
+    {
+        $idMesa = $_GET['idmesa'] ?? null;
+
+        if ($idMesa) {
+            
+            $this->modelo->eliminar($idMesa);
+            $mensaje = "Reservación eliminada correctamente.";
+        } else {
+            $mensaje = "No se especificó una mesa válida.";
+        }
+
+        // Redirigir a la página de reservaciones después de eliminar
+        $this->reservaciones();
+    }
 }
 
 // Instancia del controlador

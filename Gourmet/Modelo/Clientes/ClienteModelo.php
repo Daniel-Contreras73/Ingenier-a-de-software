@@ -25,11 +25,32 @@ class ClienteModelo {
 {
     $stmt = $this->db->prepare("
         SELECT * FROM Comanda
-        WHERE IdOperador = :idCliente
+        WHERE IdCliente = :idCliente
     ");
     $stmt->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+public function obtenerOperador($idCliente){
+   $sql = "
+        SELECT 
+            c.IdClientes,
+            c.Nombres AS NombreCliente,
+            c.Apellidos AS ApellidoCliente,
+            o.IdOperador,
+            o.Nombres AS NombreOperador,
+            o.Apellidos AS ApellidoOperador
+        FROM Clientes c
+        INNER JOIN Mesa m ON c.IdMesas = m.IdMesa
+        INNER JOIN Operadores o ON m.IdOperador = o.IdOperador
+        WHERE c.IdClientes = :idCliente
+    ";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindParam(':idCliente', $idCliente);
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 }

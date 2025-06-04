@@ -21,7 +21,7 @@ class cajeroModelo
             Comanda.Total
         FROM Comanda
         INNER JOIN Operadores ON Comanda.IdOperador = Operadores.IdOperador
-        WHERE Comanda.Total > 0
+        WHERE Comanda.Estado = 1
         ORDER BY Comanda.IdComanda DESC
     ");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@ class cajeroModelo
         // 6. Actualizar la comanda como pagada
         $stmt = $this->db->prepare("
         UPDATE Comanda 
-        SET Total = 0, Estado = 2
+        SET  Estado = 2
         WHERE IdComanda = :idComanda
     ");
         $stmt->bindParam(':idComanda', $idComanda, PDO::PARAM_INT);

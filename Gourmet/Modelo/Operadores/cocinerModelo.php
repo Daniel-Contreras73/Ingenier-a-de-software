@@ -13,22 +13,25 @@ class cocinerModelo
 
     public function comandas()
     {
-        $sql = "
-        SELECT 
-            c.IdComanda,
-            o.Nombres AS NombreOperador,
-            p.Descripcion,
-            d.Precio,
-            COUNT(d.IdProductos) AS Cantidad,
-            (d.Precio * COUNT(d.IdProductos)) AS Subtotal
-        FROM Comanda c
-        INNER JOIN Operadores o ON c.IdOperador = o.IdOperador
-        INNER JOIN DetalleComandaProducto d ON c.IdComanda = d.IdComanda
-        INNER JOIN Productos p ON d.IdProductos = p.IdProducto
-        WHERE c.Estado = 0
-        GROUP BY c.IdComanda, o.Nombres, p.Descripcion, d.Precio
-        ORDER BY c.IdComanda DESC
-    ";
+     $sql = "
+  SELECT 
+    c.IdComanda,
+    o.Nombres AS NombreOperador,
+    p.Nombre,
+    p.Descripcion,
+    d.Precio,
+    d.Cantidad,
+    (d.Precio * d.Cantidad) AS Subtotal,
+    c.Total
+FROM Comanda c
+INNER JOIN Operadores o ON c.IdOperador = o.IdOperador
+INNER JOIN DetalleComandaProducto d ON c.IdComanda = d.IdComanda
+INNER JOIN Productos p ON d.IdProductos = p.IdProducto
+WHERE c.Estado = 0
+ORDER BY c.IdComanda DESC
+
+";
+
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();

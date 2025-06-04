@@ -1,26 +1,36 @@
 <h1>Administrador de comandas</h1>
 
-<table border="1">
-    <tr>
-        <th>Comandas pendientes</th>
-        <th>Comandas terminadas</th>
-        <th>Gestor de mesas</th>
-    </tr>
-    <?php foreach($comandas as $comanda): ?>
+<table border="1" cellpadding="10">
+    <thead>
         <tr>
-            <td>
-                <?php if ($comanda['Estado'] === '0'): ?>
-                    <p><?= $comanda['IdComanda']; ?></p>
-                <?php endif; ?>
-            </td>
-            <td>
-                <?php if ($comanda['Estado'] === '1'): ?>
-                    <?php echo $comanda['IdComanda']; ?>
-                <?php endif; ?>
-            </td>
-            <td>
-                <?= $comanda['IdMesa']; ?> <!-- Aquí puedes agregar el botón o link del gestor de mesas -->
-            </td> <!-- Aquí puedes agregar el botón o link del gestor de mesas -->
+            <th>Comanda pendiente</th>
+            <th>Comanda terminada</th>
+            <th>Comanda pagada</th>
+            <th>Mesa</th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php foreach($comandas as $comanda): ?>
+            <tr>
+                <td>
+                    <?php if ($comanda['Estado'] == 0): ?>
+                        <p><?= $comanda['IdComanda']; ?></p>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($comanda['Estado'] == 1): ?>
+                        <p><?= $comanda['IdComanda']; ?></p>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($comanda['Estado'] == 2): ?>
+                        <p><?= $comanda['IdComanda']; ?></p>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?= $comanda['IdMesa'] ?? 'No asignada'; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
